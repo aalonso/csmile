@@ -20,6 +20,10 @@
 #ifndef _CSMILE_GTK_UI_H_
 #define _CSMILE_GTK_UI_H_
 
+#include <gtk/gtk.h>
+#include <glib.h>
+#include <glib-object.h>
+
 G_BEGIN_DECLS
 
 #define CSMILE_TYPE_GTK_WINDOW                        \
@@ -43,24 +47,21 @@ typedef struct _CsmileGtkWindowClass CsmileGtkWindowClass;
  */
 struct _CsmileGtkWindow
 {
-/*
 #ifdef USE_HILDON_WINDOW
     HildonWindow parent;
 #else
-*/
-    GtkWidow parent;
-/*#endif*/
+    GtkWindow parent;
+#endif
 };
 
 struct _CsmileGtkWindowClass
 {
-/*
+
 #ifdef USE_HILDON_WINDOW
     HildonWindowClass parent_class;
 #else
-*/
     GtkWindowClass parent_class;
-/*#endif*/
+#endif
     /* methods */
 };
 
