@@ -3,9 +3,6 @@
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
 
-/* Define to 1 if you have the `gthread-2.0' library (-lgthread-2.0). */
-#undef HAVE_LIBGTHREAD_2_0
-
 /* Define to 1 if you have the <memory.h> header file. */
 #undef HAVE_MEMORY_H
 

@@ -16,7 +16,7 @@ AC_PROG_INSTALL
 #AC_PROG_LIBTOOL
 
 # Checks for libraries.
-AC_CHECK_LIB(gthread-2.0, g_thread_init)
+AC_CHECK_LIB(gthread-2.0, g_thread_init, gstreamer-0.10)
 
 # Checks for header files.
 AC_HEADER_STDC
@@ -35,7 +35,10 @@ dnl ### Basic dependencies - Required ###
 dnl #####################################
 gobject_modules="gobject-2.0 >= 2.6.0
 		    glib-2.0 >= 2.6.0
-		    gtk+-2.0 >= 2.6.0"
+		    gtk+-2.0 >= 2.6.0
+            gdk-2.0 >= 2.6.0
+            gstreamer-0.10 >= 0.10
+            gstreamer-interfaces-0.10 >= 0.10"
 
 PKG_CHECK_MODULES([GOBJECT], [$gobject_modules])
 

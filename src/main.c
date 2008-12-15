@@ -18,6 +18,7 @@
  */
 
 #include <gtk/gtk.h>
+#include <gst/gst.h>
 #include "csmile-gtk-ui.h"
 
 static CsmileGtkWindow *csmile = NULL;
@@ -29,7 +30,11 @@ main (gint argc, gchar** argv)
     g_thread_init (NULL);
     gtk_init (&argc, &argv);
 
+    /* Initialize Gstreamer */
+    gst_init (&argc, &argv);
+
     csmile = CSMILE_GTK_WINDOW (csmile_gtk_window_new ());
+
     g_object_add_weak_pointer (G_OBJECT (csmile), (gpointer) &csmile);
 
     gtk_main ();

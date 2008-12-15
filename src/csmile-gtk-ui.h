@@ -41,6 +41,7 @@ G_BEGIN_DECLS
 
 typedef struct _CsmileGtkWindow CsmileGtkWindow;
 typedef struct _CsmileGtkWindowClass CsmileGtkWindowClass;
+typedef struct _CsmileGtkWindowPriv CsmileGtkWindowPriv;
 
 /*
  * CsmileGtkWindow
@@ -52,6 +53,8 @@ struct _CsmileGtkWindow
 #else
     GtkWindow parent;
 #endif
+    /* Private */
+    CsmileGtkWindowPriv *priv;
 };
 
 struct _CsmileGtkWindowClass

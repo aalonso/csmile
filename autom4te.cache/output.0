@@ -3498,7 +3498,6 @@ test -z "$INSTALL_DATA" && INSTALL_DATA='${INSTALL} -m 644'
 
 # Checks for libraries.
 
-
 { echo "$as_me:$LINENO: checking for g_thread_init in -lgthread-2.0" >&5
 echo $ECHO_N "checking for g_thread_init in -lgthread-2.0... $ECHO_C" >&6; }
 if test "${ac_cv_lib_gthread_2_0_g_thread_init+set}" = set; then
@@ -3561,12 +3560,7 @@ fi
 { echo "$as_me:$LINENO: result: $ac_cv_lib_gthread_2_0_g_thread_init" >&5
 echo "${ECHO_T}$ac_cv_lib_gthread_2_0_g_thread_init" >&6; }
 if test $ac_cv_lib_gthread_2_0_g_thread_init = yes; then
-  cat >>confdefs.h <<_ACEOF
-@%:@define HAVE_LIBGTHREAD_2_0 1
-_ACEOF
-
-  LIBS="-lgthread-2.0 $LIBS"
-
+  gstreamer-0.10
 fi
 
 
@@ -4385,7 +4379,10 @@ if test "x$GCC" = "xyes"; then CFLAGS="$CFLAGS -Wall -pedantic"; fi
 
 gobject_modules="gobject-2.0 >= 2.6.0
 		    glib-2.0 >= 2.6.0
-		    gtk+-2.0 >= 2.6.0"
+		    gtk+-2.0 >= 2.6.0
+            gdk-2.0 >= 2.6.0
+            gstreamer-0.10 >= 0.10
+            gstreamer-interfaces-0.10 >= 0.10"
 
 
 

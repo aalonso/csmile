@@ -45,8 +45,8 @@ CONFIG_CLEAN_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
-am_csmile_OBJECTS = csmile-csmile-gtk-ui.$(OBJEXT) \
-	csmile-main.$(OBJEXT)
+am_csmile_OBJECTS = csmile-csmile-gst-cam.$(OBJEXT) \
+	csmile-csmile-gtk-ui.$(OBJEXT) csmile-main.$(OBJEXT)
 csmile_OBJECTS = $(am_csmile_OBJECTS)
 am__DEPENDENCIES_1 =
 csmile_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -83,8 +83,8 @@ ECHO_N = -n
 ECHO_T = 
 EGREP = /bin/grep -E
 EXEEXT = 
-GOBJECT_CFLAGS = -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/gtk-2.0 -I/usr/lib64/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pango-1.0  
-GOBJECT_LIBS = -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lpangocairo-1.0 -lpango-1.0 -lcairo -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0  
+GOBJECT_CFLAGS = -pthread -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/gtk-2.0 -I/usr/lib64/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pango-1.0 -I/usr/include/freetype2 -I/usr/include/gstreamer-0.10 -I/usr/include/libxml2  
+GOBJECT_LIBS = -pthread -lgtk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lfreetype -lfontconfig -lgdk-x11-2.0 -lgdk_pixbuf-2.0 -lpangocairo-1.0 -lpango-1.0 -lcairo -lgstinterfaces-0.10 -lgstreamer-0.10 -lgobject-2.0 -lgmodule-2.0 -lgthread-2.0 -lrt -lxml2 -lglib-2.0  
 GREP = /bin/grep
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
@@ -93,7 +93,7 @@ INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 LDFLAGS = 
 LIBOBJS = 
-LIBS = -lgthread-2.0 
+LIBS = 
 LTLIBOBJS = 
 MAINT = #
 MAKEINFO = ${SHELL} /home/aalonso/workspace/maemo/cSmile_0.0.1/missing --run makeinfo
@@ -158,21 +158,25 @@ sharedstatedir = ${prefix}/com
 srcdir = .
 sysconfdir = ${prefix}/etc
 target_alias = 
+top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
 csmile_CFLAGS = \
     -I. -I$(top_srcdir)     \
     -I$(top_srcdir)/src     \
     $(GOBJECT_CFLAGS)		\
-	$(GTHREAD_CFLAGS)
+	$(GTHREAD_CFLAGS)		\
+	$(GSTREAMER_CFLAGS)
 
 csmile_LDADD = \
     $(GOBJECT_LIBS)	  \
-	$(GTHREAD_LIBS)
+	$(GTHREAD_LIBS)		\
+	$(GSTREAMER_LIBS)
 
-csmile_SOURCES = \
-	csmile-gtk-ui.h          \
-    csmile-gtk-ui.c          \
+csmile_SOURCES = csmile-gst-cam.h	\
+	csmile-gst-cam.c	\
+	csmile-gtk-ui.h     \
+    csmile-gtk-ui.c     \
     main.c    
 
 all: all-am
@@ -241,6 +245,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+include ./$(DEPDIR)/csmile-csmile-gst-cam.Po
 include ./$(DEPDIR)/csmile-csmile-gtk-ui.Po
 include ./$(DEPDIR)/csmile-main.Po
 
@@ -257,6 +262,20 @@ include ./$(DEPDIR)/csmile-main.Po
 #	source='$<' object='$@' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
 #	$(COMPILE) -c `$(CYGPATH_W) '$<'`
+
+csmile-csmile-gst-cam.o: csmile-gst-cam.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(csmile_CFLAGS) $(CFLAGS) -MT csmile-csmile-gst-cam.o -MD -MP -MF $(DEPDIR)/csmile-csmile-gst-cam.Tpo -c -o csmile-csmile-gst-cam.o `test -f 'csmile-gst-cam.c' || echo '$(srcdir)/'`csmile-gst-cam.c
+	mv -f $(DEPDIR)/csmile-csmile-gst-cam.Tpo $(DEPDIR)/csmile-csmile-gst-cam.Po
+#	source='csmile-gst-cam.c' object='csmile-csmile-gst-cam.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(csmile_CFLAGS) $(CFLAGS) -c -o csmile-csmile-gst-cam.o `test -f 'csmile-gst-cam.c' || echo '$(srcdir)/'`csmile-gst-cam.c
+
+csmile-csmile-gst-cam.obj: csmile-gst-cam.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(csmile_CFLAGS) $(CFLAGS) -MT csmile-csmile-gst-cam.obj -MD -MP -MF $(DEPDIR)/csmile-csmile-gst-cam.Tpo -c -o csmile-csmile-gst-cam.obj `if test -f 'csmile-gst-cam.c'; then $(CYGPATH_W) 'csmile-gst-cam.c'; else $(CYGPATH_W) '$(srcdir)/csmile-gst-cam.c'; fi`
+	mv -f $(DEPDIR)/csmile-csmile-gst-cam.Tpo $(DEPDIR)/csmile-csmile-gst-cam.Po
+#	source='csmile-gst-cam.c' object='csmile-csmile-gst-cam.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(csmile_CFLAGS) $(CFLAGS) -c -o csmile-csmile-gst-cam.obj `if test -f 'csmile-gst-cam.c'; then $(CYGPATH_W) 'csmile-gst-cam.c'; else $(CYGPATH_W) '$(srcdir)/csmile-gst-cam.c'; fi`
 
 csmile-csmile-gtk-ui.o: csmile-gtk-ui.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(csmile_CFLAGS) $(CFLAGS) -MT csmile-csmile-gtk-ui.o -MD -MP -MF $(DEPDIR)/csmile-csmile-gtk-ui.Tpo -c -o csmile-csmile-gtk-ui.o `test -f 'csmile-gtk-ui.c' || echo '$(srcdir)/'`csmile-gtk-ui.c
